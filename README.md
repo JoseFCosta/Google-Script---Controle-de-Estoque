@@ -3,23 +3,20 @@
 ## Objetivo
 Este projeto tem como objetivo criar um sistema de controle de estoque para uma loja, registrando e atualizando itens recebidos de fornecedores. 
 
-Utilizando as ferramentas Google, o projeto serve para demonstrar habilidades na integração do **Google Sheets**, **Google Forms** e **Google Apps Script**.
+Utilizando as ferramentas Google, o projeto serve para demonstrar habilidades na integração do **Google Sheets**, **Google Forms**, **Google Sites**,   e **Google Apps Script**.
 
 ## Ferramentas Utilizadas
 - **Google Sheets**: Para armazenar e organizar os dados dos produtos em estoque.
 - **Google Forms**: Para registro de entrada de produtos por meio de um formulário.
 - **Google Apps Script**: Para automatizar o processamento e manipulação dos dados entre as abas da planilha.
 
-## LINKS RELACIONADOS AO PROJETO
-**1 - GOOGLE FORMS**
-https://docs.google.com/forms/d/e/1FAIpQLSfM1-n9HTXIWyiO2FIjPH_49vxbzGwzK1Uk0a3nCZzkrTImnw/viewform
+## Links Relacionados ao Projeto
 
-**2 - PLANILHA**
-https://docs.google.com/spreadsheets/d/1vubGW8NVO_xntHqN4wgqP-RsL4i5cx-PO1yIynsbWU4/edit?usp=sharing
-
-**3 - SITE**
-https://script.google.com/macros/s/AKfycbzOuJZmm6_Ki5FxtqnvILdrcSSXcWatjTCgmx6VecuEh5c80KqE4aLF6Jo_9koH2ZFd/exec
-
+- **Google Forms**: [Formulário de Registro de Entrada de Produtos](https://docs.google.com/forms/d/e/1FAIpQLSfM1-n9HTXIWyiO2FIjPH_49vxbzGwzK1Uk0a3nCZzkrTImnw/viewform)
+- **Planilha Google Sheets**: [Planilha de Estoque e Classificação](https://docs.google.com/spreadsheets/d/1vubGW8NVO_xntHqN4wgqP-RsL4i5cx-PO1yIynsbWU4/edit?usp=sharing)
+- **Site do Projeto**: 
+  - [Google Sites - Classificação de Produtos](https://sites.google.com/view/classificao-de-produto/in%C3%ADcio)
+  - [App Script - Classificação de Produtos](https://script.google.com/macros/s/AKfycbzOuJZmm6_Ki5FxtqnvILdrcSSXcWatjTCgmx6VecuEh5c80KqE4aLF6Jo_9koH2ZFd/exec)
 
 ## Funcionalidades
 
