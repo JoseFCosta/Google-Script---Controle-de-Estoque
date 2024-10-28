@@ -5,20 +5,21 @@ Este projeto tem como objetivo criar um sistema de controle de estoque para uma 
 
 Utilizando as ferramentas Google, o projeto serve para demonstrar habilidades na integração do **Google Sheets**, **Google Forms** e **Google Apps Script**.
 
-### LINK PARA ACESSAR O PROJETO
-##1 - GOOGLE FORMS
-https://docs.google.com/forms/d/e/1FAIpQLSfM1-n9HTXIWyiO2FIjPH_49vxbzGwzK1Uk0a3nCZzkrTImnw/viewform
-
-##2 - PLANILHA
-https://docs.google.com/spreadsheets/d/1vubGW8NVO_xntHqN4wgqP-RsL4i5cx-PO1yIynsbWU4/edit?usp=sharing
-
-##3 - SITE
-https://script.google.com/macros/s/AKfycbzOuJZmm6_Ki5FxtqnvILdrcSSXcWatjTCgmx6VecuEh5c80KqE4aLF6Jo_9koH2ZFd/exec
-
 ## Ferramentas Utilizadas
 - **Google Sheets**: Para armazenar e organizar os dados dos produtos em estoque.
 - **Google Forms**: Para registro de entrada de produtos por meio de um formulário.
 - **Google Apps Script**: Para automatizar o processamento e manipulação dos dados entre as abas da planilha.
+
+## LINKS RELACIONADOS AO PROJETO
+**1 - GOOGLE FORMS**
+https://docs.google.com/forms/d/e/1FAIpQLSfM1-n9HTXIWyiO2FIjPH_49vxbzGwzK1Uk0a3nCZzkrTImnw/viewform
+
+**2 - PLANILHA**
+https://docs.google.com/spreadsheets/d/1vubGW8NVO_xntHqN4wgqP-RsL4i5cx-PO1yIynsbWU4/edit?usp=sharing
+
+**3 - SITE**
+https://script.google.com/macros/s/AKfycbzOuJZmm6_Ki5FxtqnvILdrcSSXcWatjTCgmx6VecuEh5c80KqE4aLF6Jo_9koH2ZFd/exec
+
 
 ## Funcionalidades
 
