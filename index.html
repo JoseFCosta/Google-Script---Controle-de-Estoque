@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+    body {
+      font-family: 'Montserrat';
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 600px;
+    }
+
+    .item {
+      cursor: pointer;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 10px 0;
+      background-color: #fff;
+      transition: 0.3s;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .item:hover {
+      background-color: #f1f1f1;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    #buscarItem {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 95%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .modal h3 {
+      margin-top: 0;
+    }
+
+    .input-container label, .input-container input, .input-container select {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 1em;
+    }
+
+    .input-container input, .input-container select {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Itens a Classificar - No estoque</h1>
+
+    <input type="text" id="buscarItem" placeholder="Buscar item..." onkeyup="filtrarItens()">
+
+    <div id="listaItens"></div>
+  </div>
+
+  <div id="classificacaoModal" class="modal">
+    <div class="modal-content input-container">
+      <h3 id="itemNome"></h3>
+      <label>Valor (em R$):</label>
+      <input id="valor" placeholder="Ex: 10.50" required>
+      <label>Unidade de Medida:</label>
+      <select id="unidade">
+        <option value="kg">kg</option>
+        <option value="un">unidade</option>
+        <option value="litro">litro</option>
+        <option value="caixa">caixa</option>
+      </select>
+      <label>Observação:</label>
+      <input type="text" id="observacao" placeholder="Observações adicionais">
+      <button class="btn" onclick="enviarClassificacao()">Enviar</button>
+    </div>
+  </div>
+
+  <div id="statusModal" class="modal">
+    <div class="modal-content">
+      <p id="statusMensagem"></p>
+    </div>
+  </div>
+
+  <script>
+    let itemIndexSelecionado = null;
+    let nomeItemSelecionado = '';
+    let itens = [];
+
+    function carregarItensAClassificar() {
+      google.script.run.withSuccessHandler(exibirItens).obterItensAClassificar();
+    }
+
+    function exibirItens(itensData) {
+      itens = itensData;
+      const listaItens = document.getElementById('listaItens');
+      listaItens.innerHTML = '';
+
+      itens.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.textContent = `${item[0]} - Quantidade: ${item[1]}`;
+        div.onclick = () => selecionarItem(index, item[0]);
+        listaItens.appendChild(div);
+      });
+    }
+
+    function filtrarItens() {
+      const busca = document.getElementById('buscarItem').value.toLowerCase();
+      const listaItens = document.getElementById('listaItens');
+      listaItens.innerHTML = '';
+
+      itens
+        .filter(item => item[0].toLowerCase().includes(busca))
+        .forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.textContent = `${item[0]} - Quantidade: ${item[1]}`;
+          div.onclick = () => selecionarItem(index, item[0]);
+          listaItens.appendChild(div);
+        });
+    }
+
+    function selecionarItem(index, nomeItem) {
+      itemIndexSelecionado = index;
+      nomeItemSelecionado = nomeItem;
+      document.getElementById('itemNome').textContent = `Classificar: ${nomeItem}`;
+      abrirModal('classificacaoModal');
+    }
+
+    function abrirModal(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+    }
+
+    function fecharModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    function enviarClassificacao() {
+      const valor = document.getElementById('valor').value;
+      const unidade = document.getElementById('unidade').value;
+      const observacao = document.getElementById('observacao').value;
+
+      if (valor && unidade) {
+        fecharModal('classificacaoModal');
+        exibirStatusModal("Enviando dados...");
+
+        google.script.run.withSuccessHandler(() => {
+          exibirStatusModal("Dados enviados com sucesso!");
+          setTimeout(() => {
+            fecharModal('statusModal');
+            carregarItensAClassificar();
+          }, 3000);
+        }).enviarClassificacao(itemIndexSelecionado, valor, unidade, observacao);
+      } else {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+      }
+    }
+
+    function exibirStatusModal(mensagem) {
+      document.getElementById('statusMensagem').textContent = mensagem;
+      abrirModal('statusModal');
+    }
+
+    function abrirCompras() {
+      google.script.run.withSuccessHandler(function(html) {
+        document.body.innerHTML = html;
+      }).doGetCompras();
+    }
+
+    carregarItensAClassificar();
+  </script>
+</body>
+</html>
